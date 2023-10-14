@@ -7,7 +7,7 @@ fn spawn_app() {
 }
 #[tokio::test]
 async fn health_check_works() {
-   spawn_app();
+    spawn_app();
 
     let client = reqwest::Client::new();
 
@@ -16,7 +16,6 @@ async fn health_check_works() {
         .send()
         .await
         .expect("Failed to exectute request. ");
-
 
     // Assert
 
