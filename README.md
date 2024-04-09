@@ -2,6 +2,8 @@
 
 ## Dev Notes Re Installation
 - Make sure libssl-dev is installed (WSL2)
+-  `sudo apt install pkg-config`
+-  `sudo apt-get install libudev-dev`
 
 ## Commands
 
