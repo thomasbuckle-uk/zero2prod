@@ -29,4 +29,20 @@
 ## Security Audit
 - Install using `cargo install cargo-audit`
 - Run using `cargo audit`
-- 
+
+
+
+---
+
+## Database
+
+Make sure psql & sqlx are both installed, then run the bash script
+
+```shell
+./scripts/init_db.sh
+```
+
+To run migrations without having to down the postgres container each time use:
+```shell
+SKIP_DOCKER=true ./scripts/init_db.sh
+```
