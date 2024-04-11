@@ -34,7 +34,6 @@ async fn health_check_works() {
 async fn subscribe_returns_a_200_for_valid_form_date() {
     // Tests really are very similar to PHPUnit & Pest testing frameworks
 
-
     // Setup
     let app_address = spawn_app();
     let client = reqwest::Client::new();
@@ -53,10 +52,8 @@ async fn subscribe_returns_a_200_for_valid_form_date() {
     assert_eq!(200, response.status().as_u16());
 }
 
-
 #[tokio::test]
 async fn subscribe_returns_a_400_when_data_is_missing() {
-
     // An example of table-driven test also known as a parametrised test.
     // We've done tests like these before in Symfony/Laravel land testing the shape of responses
 
@@ -70,9 +67,7 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
         ("", "missing both a name and email"),
     ];
 
-
     for (invalid_body, error_message) in test_cases {
-
         // Run
         let response = client
             .post(&format!("{}/subscriptions", &app_address))
