@@ -51,3 +51,13 @@ To run migrations without having to down the postgres container each time use:
 ```shell
 SKIP_DOCKER=true ./scripts/init_db.sh
 ```
+
+
+---
+
+## Deployements, CI/CD 
+
+To allow Docker to build successfully it needs sqlx to be prepared using
+```shell
+cargo sqlx prepare --workspace
+```
