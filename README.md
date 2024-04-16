@@ -61,3 +61,8 @@ To allow Docker to build successfully it needs sqlx to be prepared using
 ```shell
 cargo sqlx prepare --workspace
 ```
+
+Docker command to build 
+```shell
+docker build --tag zero2prod --file Dockerfile .
+```
