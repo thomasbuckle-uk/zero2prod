@@ -37,6 +37,8 @@ features = [
 ]
 
 [dev-dependencies]
+once_cell = "1.19.0"
 reqwest = "0.12.3"
+
 
 

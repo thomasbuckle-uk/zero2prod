@@ -25,6 +25,11 @@
 - Mutes warning using the folloing attribute `#[allow(clippy::lint_name)]`
 - Mute project wide by adding `#![allow(clippy::link_name)]` in cargo.toml
 
+## Bunyan
+
+- Used to prettify outputted logs from tests
+- to install `cargo install bunyan`
+- example usage: ` cargo test health_check_works | bunyan`
 
 ## Security Audit
 - Install using `cargo install cargo-audit`
