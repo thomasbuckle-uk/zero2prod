@@ -1,8 +1,10 @@
+use std::net::TcpListener;
+
 use once_cell::sync::Lazy;
 use sqlx::{Connection, Executor, PgConnection, PgPool};
-use std::net::TcpListener;
 use uuid::Uuid;
-use zero2prod::configuration::{get_configuration, DatabaseSettings};
+
+use zero2prod::configuration::{DatabaseSettings, get_configuration};
 use zero2prod::startup::run;
 use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
@@ -147,5 +149,35 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             "The API didn't fail with 400 Bad Request when payload was {:?}.",
             error_message
         )
+    }
+}
+
+#[tokio::test]
+async fn subscribe_returns_a_400_when_fields_are_present_but_invalid() {
+    // Setup
+    
+    let app = spawn_app().await;
+    let client = reqwest::Client::new();
+    let test_cases = vec![
+        ("name=&email=thomasbuckle.uk%40gmail.com", "empty name"),
+        ("name=Thomas&email=", "empty email"),
+        ("name=Thomas&email=definitely-not-an-email", "invalid email"),
+    ];
+    
+    for (body, description) in test_cases {
+        let response = client
+            .post(&format!("{}/subscriptions", &app.address))
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .body(body)
+            .send()
+            .await
+            .expect("Failed to execute request.");
+        
+        assert_eq!(
+            400,
+            response.status().as_u16(),
+            "The API did not return a 400 Bad Request when the payload was {}.",
+            description
+        );
     }
 }
